@@ -1,0 +1,37 @@
+<section class="mainbar">
+	<section class="matter">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="row">
+					<div class="col-lg-12">
+						<h1 class="page-header">{{detailsPhoto.photo.title | limitTo:'15'}}</h1>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-8">
+						<img class="img-responsive" ng-src="{{detailsPhoto.photo.url_z}}" alt="">
+					</div>
+					<div class="col-md-4">
+						<div>
+							<h3>Description</h3>
+							<p ng-bind-html="detailsPhoto.photo.description._content | descriptionLimit : true : 550 : ' ...'"></p>
+						</div>
+						<div>
+							<h3>Details</h3>
+							<ul>
+								<li><strong>Author:</strong> {{detailsPhoto.photo.ownername | limitTo:'22'}}</li>
+								<li><strong>Tags:</strong> {{detailsPhoto.photo.tags | limitTo:'22'}}</li>
+								<li><strong>Date taken:</strong> {{detailsPhoto.photo.datetaken | limitTo:'22'}}</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="form-group row row--buttons">
+			<div class="col-md-12">
+				<button class="button" ng-click="detailsPhoto.cancel()">BACK</button>
+			</div>
+		</div>
+	</section>
+</section>

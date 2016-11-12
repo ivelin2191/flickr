@@ -1,0 +1,66 @@
+<section class="mainbar">
+	<section class="matter">
+		<!--<pre>{{searchPhoto.photos | json}}</pre>-->
+
+		<div class="row">
+			<div class="col-md-12">
+				<div class="row row--heading">
+					<div class="col-md-12">
+						<h1>Flickr Photos</h1>
+					</div>
+				</div>
+				<div class="form-group row row--form_item">
+					<div class="col-md-12">
+						<div class="col-md-1">
+							<p class="form__label"><strong>Search:</strong></p>
+						</div>
+						<div class="col-md-6">
+							<input type="text" id="articleid" required="required" data-ng-model="searchPhoto.freeTextSearch" data-ng-model-options="{ debounce: 1000 }"
+								ng-change="searchPhoto.search()" class="form__input form__input--active" />
+							<span id="helpBlock2" class="help-block">A free text search. Photos who's title, description or tags contain the text will be returned.</span>
+						</div>
+					</div>
+				</div>
+				<div class="row" infinite-scroll="searchPhoto.nexPage()" infinite-scroll-disabled="searchPhoto.busy" infinite-scroll-distance="0"
+					infinite-scroll-container='".constrained"'>
+					<div class="col-lg-3 col-md-4 col-sm-6" ng-repeat="photo in searchPhoto.photos track by $index" >
+						<div class="thumbnail animate-repeat" id="{{photo.id}}">
+							<img ng-src="{{photo.url_q}}" class="img-thumbnail searchImage" alt="{{photo.title}}">
+							<div class="caption">
+								<div>
+									Title: <a class="btn btn-link" href="{{photo.flickrPhotoLink}}" target="_blank" title="www.flickr.com photo {{photo.title  | limitTo:'40'}} page">
+											{{photo.title  | limitTo:'12'}} &nbsp;
+										</a>
+								</div>
+								<div>
+									Author: <a class="btn btn-link" href="{{photo.flickrAuthorLink}}" target="_blank" title="www.flickr.com author {{photo.ownername  | limitTo:'40'}} page">
+											{{photo.ownername  | limitTo:'12'}}
+										</a>
+								</div>
+								<div>
+									<div>
+										Descriptin:
+										<div ng-bind-html="photo.description._content | descriptionLimit : true : 50 : ' ...'" class="photo-desc"></div>
+									</div>
+									<p class="pull-right">
+										<a href="#" ng-click="searchPhoto.goToDetailsPhoto(photo)" class="btn btn-link" title="go to details page">
+											more ...
+										</a>
+									</p>
+									<p>{{photo.views}} views</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-3 col-lg-3 col-md-3" ng-show="searchPhoto.busy==true">
+						Loading data...
+					</div>
+					<div class="col-sm-3 col-lg-3 col-md-3" 
+						ng-show="searchPhoto.busy==false && searchPhoto.photos.length==0 && searchPhoto.freeTextSearch.length > 2">
+						Not found result with these search criteria
+					</div>
+				</div>
+			</div>
+	</section>
+</section>
+<div id="testHash">q da vidim</div>
